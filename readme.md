@@ -16,7 +16,7 @@
 
 ## Treasure Island
 
-![Treasure Island](https://raw.githubusercontent.com/serocha/python-projects/main/imgs/treasure-island.png)
+![Treasure Island](https://raw.githubusercontent.com/serocha/python-projects/main/imgs/treasure-island1.png)
 
 <p>Choose your own adventure.</p>
 <p>Explore an ominous island and see if you can survive. The game is an unfinished proof-of-concept as it lacks ending locations, but I really enjoyed making it. Adding more content is relatively straightforward, so I'll see about revisiting the project when I have time. This was my first attempt at designing a map that the player can traverse, and it taught me some good lessons on managing objects.</p>
