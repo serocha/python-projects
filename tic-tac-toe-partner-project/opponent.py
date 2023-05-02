@@ -93,7 +93,7 @@ def set_move(row: int, elem: int, symbol: str, board: list) -> None:
 def opponent_move(board: list) -> None:
     """A method that carries out which move the computer will make.
 
-    Currently assumes that the computer will play O's."""
+    Assumes that the computer will play O's."""
     best_move = eval_move(O, board)
     # print("Best move:", best_move)
     if best_move != (-1, -1):
