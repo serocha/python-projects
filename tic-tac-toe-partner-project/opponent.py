@@ -6,7 +6,7 @@ from art import EMPTY, X, O
 
 
 def get_available_moves(board: list) -> list:
-    """Looks for all EMPTY slots on the board and returns them as a list of tuples."""
+    """Looks for all EMPTY slots on the board and returns them as a list of coordinate tuples."""
     tuples = []
     for x in range(3):
         for y in range(3):
@@ -23,7 +23,7 @@ def get_opposite_symbol(symbol: str) -> str:
 
 
 def look_for_winner(symbol: str, board: list) -> bool:
-    """Utility for use by the eval_move() function."""
+    """A utility used by the eval_move() function."""
     for row in board:
         if symbol == row[0] == row[1] == row[2]:
             return True
@@ -45,7 +45,7 @@ def eval_move(symbol: str, board: list, depth: int = 0) -> tuple:
     it recursively calls itself up to depth rounds, currently hardcoded at 1 round in the future.
     If the algorithm doesn't find an optimal move before hitting depth, it returns (-1, -1).
     """
-    if depth > 1:
+    if depth > 2:  # 2 turns into the future
         return -1, -1
 
     available_moves = get_available_moves(board)
@@ -102,7 +102,7 @@ def opponent_move(board: list) -> None:
         corners = get_available_corners(board)  # otherwise prioritize corners
         if len(corners) > 0:
             corner_move = choice(corners)
-            set_move(corner_move[0], corner_move[1], O, board)
+            set_move(corner_move[0], corner_move[1], O, board)  # more optimal might be the opposite corner from player
         else:
             move = choice(get_available_moves(board))  # else pick a random move (shouldn't trigger)
             set_move(move[0], move[1], O, board)

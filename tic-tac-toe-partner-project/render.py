@@ -137,14 +137,3 @@ def draw_board(board: list) -> None:
         row2=row_strings[1],
         row3=row_strings[2],
     ))
-
-
-# FOR QUICK TESTING
-#
-# table = [
-#     [X, X, O],
-#     [EMPTY, X, EMPTY],
-#     [EMPTY, EMPTY, X],
-# ]
-# table = return_clear_board()
-# draw_board(table)
