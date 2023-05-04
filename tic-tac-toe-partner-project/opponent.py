@@ -1,5 +1,5 @@
 # A decision-making algorithm for the computer opponent
-# Version 1
+# Version 2
 from copy import deepcopy
 from random import choice
 from art import EMPTY, X, O
@@ -45,30 +45,33 @@ def eval_move(symbol: str, board: list, depth: int = 0) -> tuple:
     it recursively calls itself up to depth rounds, currently hardcoded at 1 round in the future.
     If the algorithm doesn't find an optimal move before hitting depth, it returns (-1, -1).
     """
-    if depth > 2:  # 2 turns into the future
+    # TODO: Somehow eval_move returns NoneType when out of moves and I can't find how
+    if depth > 2:
         return -1, -1
 
     available_moves = get_available_moves(board)
-    for move in available_moves:
-        test_board = deepcopy(board)
-        test_board[move[0]][move[1]] = symbol  # move to test
+    if len(available_moves) > 1:
+        for move in available_moves:
+            test_board = deepcopy(board)
+            test_board[move[0]][move[1]] = symbol  # move to test
 
-        if look_for_winner(symbol, test_board):  # winning move?
-            # print("Winning move found:", move)
-            return move
+            if look_for_winner(symbol, test_board):  # winning move?
+                # print("Winning move found:", move)
+                return move if move is not None else (-1, -1)
 
-    for move in available_moves:
-        test_board = deepcopy(board)
-        test_board[move[0]][move[1]] = get_opposite_symbol(symbol)
-        if look_for_winner(get_opposite_symbol(symbol), test_board):  # block a loss?
-            # print("Blocking loss:", move)
-            return move
+        for move in available_moves:
+            test_board = deepcopy(board)
+            test_board[move[0]][move[1]] = get_opposite_symbol(symbol)
+            if look_for_winner(get_opposite_symbol(symbol), test_board):  # block a loss?
+                # print("Blocking loss:", move)
+                return move if move is not None else (-1, -1)
 
-    for move in available_moves:
-        test_board = deepcopy(board)
-        test_board[move[0]][move[1]] = symbol
-        # print("Peering into the future:", move)
-        return eval_move(symbol, test_board, depth + 1)  # recursively look into the future up to depth
+        for move in available_moves:
+            test_board = deepcopy(board)
+            test_board[move[0]][move[1]] = symbol
+            # print("Peering into the future:", move)
+            return eval_move(symbol, test_board, depth + 1)  # recursively look into the future up to depth
+    return -1, -1
 
 
 def get_available_corners(board: list) -> list:
@@ -94,9 +97,9 @@ def opponent_move(board: list) -> None:
     """A method that carries out which move the computer will make.
 
     Assumes that the computer will play O's."""
-    best_move = eval_move(O, board)
+    best_move = eval_move(O, board)  # TODO: No clue where NoneType is coming from
     # print("Best move:", best_move)
-    if best_move != (-1, -1):
+    if best_move != (-1, -1) and best_move is not None:
         set_move(best_move[0], best_move[1], O, board)  # if best move, perform move
     else:
         corners = get_available_corners(board)  # otherwise prioritize corners
@@ -104,7 +107,8 @@ def opponent_move(board: list) -> None:
             corner_move = choice(corners)
             set_move(corner_move[0], corner_move[1], O, board)  # more optimal might be the opposite corner from player
         else:
-            move = choice(get_available_moves(board))  # else pick a random move (shouldn't trigger)
-            set_move(move[0], move[1], O, board)
+            move = choice(get_available_moves(board))  # if all else fails, pick a random move
+            if move is not None:
+                set_move(move[0], move[1], O, board)
 
 
