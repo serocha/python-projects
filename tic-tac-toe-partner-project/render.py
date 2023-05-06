@@ -1,16 +1,10 @@
-# Renders the board from a list of moves
-# Version 4
-# - added clear_board(board) -> empties an existing board
-# - added return_clear_board() -> returns a new blank board
-# - added has_winner(board) -> returns True if there's a winner
-# - added get_win_symbol(board) -> returns what the winning symbol is
-# - added trigger_on_winner(board, func) -> triggers the function upon finding a winner
+# This module renders the playing board from a list of moves
+# v4
 from art import *
 from copy import deepcopy
 from typing import Callable
 
 
-# awesome dynamic solution from https://codereview.stackexchange.com/questions/82103/ascii-fication-of-playing-cards
 def merge_strings(prev_str: str, next_str: str) -> str:
     """Utility function that merges two multiline strings together, prev_str and next_str."""
     return "\n".join(["  ".join(elem) for elem in zip(prev_str.split("\n"), next_str.split("\n"))])

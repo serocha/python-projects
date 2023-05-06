@@ -1,5 +1,5 @@
-# A decision-making algorithm for the computer opponent
-# Version 2
+# This module includes a decision-making algorithm for the computer opponent
+# v2 - bug fix
 from copy import deepcopy
 from random import choice
 from art import EMPTY, X, O
@@ -45,7 +45,7 @@ def eval_move(symbol: str, board: list, depth: int = 0) -> tuple:
     it recursively calls itself up to depth rounds, currently hardcoded at 1 round in the future.
     If the algorithm doesn't find an optimal move before hitting depth, it returns (-1, -1).
     """
-    # TODO: Somehow eval_move returns NoneType when out of moves and I can't find how
+    # TODO: eval_move returns NoneType when out of moves, not sure what the edge case may be
     if depth > 2:
         return -1, -1
 

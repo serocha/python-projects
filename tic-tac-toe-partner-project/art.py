@@ -1,7 +1,7 @@
-# A collection of assets related to rendering the playing board
+# This module is a collection of assets related to rendering the playing board
+# v2
 def esc(code):
     """Returns an ANSI escape code."""
-    # https://realpython.com/lessons/ansi-escape-sequences/
     return f'\033[{code}m'
 
 
