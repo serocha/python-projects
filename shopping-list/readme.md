@@ -1,2 +1,2 @@
 ## Shopping List
-This app allows the user to create and save shopping lists. I've practiced adding basket-like functionality, meaning that it tracks the quantity and cost of the items within a given list.
+This app allows the user to create, save, and load basic shopping lists with a simple interface.

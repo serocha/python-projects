@@ -27,7 +27,12 @@ class ShoppingItem:
         return self._cost_per_item * self._quantity
 
     def __str__(self):
-        return "%s, Cost: $%.2f, Qty: %d" % (self.get_name(), self.get_cost_per_item(), self.get_quantity())
+        return "Name: %s | Per Item Cost: $%.2f | Qty: %d | Item Total: $%.2f" % (
+            self.get_name(),
+            self.get_cost_per_item(),
+            self.get_quantity(),
+            self.get_total_cost()
+        )
 
 
 
